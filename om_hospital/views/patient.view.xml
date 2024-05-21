@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="view_patient_hospital_tree">
+      <field name="name">hospital.patient.tree</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+        <tree>
+
+            <field name="name" string="Patient Name"/>
+            <field name="ref"/>
+            <field name="age" avg="agee"/>
+            <field name="gender"/>
+            <field name="appointment_count" sum="appointmentt"/>
+            <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+        </tree>
+    </field>
+</record>
+    <record model="ir.ui.view" id="view_patient_hospital_graph">
+      <field name="name">hospital.patient.graph</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+        <graph string="patient graph">
+
+            <field name="name" type="row"/>
+            <field name="appointment_id" type="measure"/>
+
+        </graph>
+    </field>
+</record>
+    <record model="ir.ui.view" id="view_patient_hospital_pivot">
+      <field name="name">hospital.patient.pivot</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+        <pivot>
+
+            <field name="name" type="row"/>
+            <field name="ref" type="col"/>
+
+
+        </pivot>
+    </field>
+</record>
+    <record id="view_hospital_patient_kanban" model="ir.ui.view">
+        <field name="name">hospital.patient.kanban</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="ref"/>
+                <field name="gender"/>
+                <field name="image_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div  t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img
+                                        t-att-src="kanban_image
+                                        ('hospital.patient',
+                                        'image_id',
+                                         record.id.raw_value)"
+                                        alt="Avatar"/>
+
+                            </div>
+
+
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>Name:
+                                        <field name="name"/>
+                                    </li>
+                                    <li>Age:
+                                        <field name="ref"/>
+                                    </li>
+                                    <li>Gender:
+                                        <field name="gender"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+
+            </kanban>
+            </field>
+        </record>
+
+<record model="ir.ui.view" id="view_patient_hospital_form">
+      <field name="name">hospital.patient.form</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+          <form>
+              <sheet>
+                   <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                  <div class="oe_button_box" name="button_box">
+                      <button class="oe_stat_button" type="object" name="action_view_appointment" icon="fa-star">
+                          <field string="Appointments" name="appointment_count" widget="statinfo"/>
+                      </button>
+                  </div>
+
+                  <div class="alert alert-warning text-center o_form_header"
+                       role="alert" attrs="{'invisible': [('is_birthday', '=', False)]}">
+                      <a class="close" data-bs-dismiss="alert" href="#">x</a>
+                      <div>
+                          <strong>Today is birthday</strong>
+                      </div>
+                      <div>wish
+                          <field name="name" readonly="1"/>
+                      </div>
+                  </div>
+
+                    <field name="image_id" widget="image" class="oe_avatar"/>
+
+                  <div class="oe_title">
+                      <h2>
+                          <field name="ref" readonly="1"/>
+                      </h2>
+                      <h2>
+                          <label for="name" string="Name" class="oe_edit_only"/>
+                          <field name="name"/>
+                      </h2>
+                  </div>
+
+
+
+                  <group>
+                      <group>
+                          <field name="date_of_birth"/>
+                          <field name="is_birthday" invisible="1"/>
+
+                          <field name="age"/>
+
+                          <field name="appointment_id"/>
+
+
+                      </group>
+                      <group>
+                          <field name="gender" invisible="context.get('dddddd')" widget="radio"/>
+                          <field name="tags_ids" widget="many2many_checkboxes" options="{'color_field': 'color'}"/>
+
+                          <field name="active" invisible="1"/>``
+
+                      </group>
+                      <group string="Other Information" name="other_info">
+                          <group>
+                              <field name="parent"
+                                     attrs="{'invisible': ['|', ('age', '>', 18), ('gender', '=', 'male')]}"/>
+                              <field name="marital_status"/>
+                              <field name="partner_name"
+                                     attrs="{'readonly': [('marital_status', '!=', 'married')], 'required': [('marital_status', '=', 'married')]}"/>
+                          </group>
+                          <group>
+                              <field name="phone_number" widget="phone"/>
+                              <field name="e_mail" widget="email"/>
+                              <field name="website" widget="url"/>
+
+                          </group>
+                      </group>
+
+                  </group>
+              </sheet>
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                  <field name="activity_ids"/>
+                  <field name="message_ids"/>
+              </div>
+          </form>
+      </field>
+</record>
+<record model="ir.ui.view" id="view_patient_hospital_search">
+      <field name="name">hospital.patient.search</field>
+      <field name="model">hospital.patient</field>
+      <field name="arch" type="xml">
+        <search>
+<field name="name" string="Patient Name"  filter_domain="['|', ('name', 'ilike', self), ('ref', 'ilike', self)]"/>
+                            <field name="ref" />
+
+            <field name="age" />
+      <field name="gender"/>
+
+            <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
+<!--            <filter name="filter_kids" string="Kids" domain="[('age', '&lt;', 5)]"/>-->
+            <group expand="0" string="Group By">
+                        <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                    </group>
+            <separator/>
+             <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
+             <separator/>
+             <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+              <searchpanel>
+                        <field name="gender" string="Gender"  icon="fa-users" enable_counters="1" select="multi"/>
+                    </searchpanel>
+        </search>
+      </field>
+
+</record>
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+         <field name="context" eval="{'search_default_filter_male': 1,'search_default_group_by_gender': 1}"/>
+    <field name="help" type="html">
+    <p class="o_view_nocontent_smiling_face">  create the first patient </p>
+    </field>
+    </record>
+ <menuitem id="menu_patient" name="Patients" sequence="0" parent="menu_patient_master" action="action_hospital_patient"/>
+
+</odoo>

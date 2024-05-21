@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_patient_id_card">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <table class="table table-condensed" style="border: 3px solid black !important;">
+                                    <tr>
+                                        <td width="40%">
+                                            <p style="text-align:center;padding-top:10px;">
+                                                <img t-if="not o.image"
+                                                     t-att-src="'/web/static/src/img/placeholder.png'" height="140"
+                                                     border="1" width="120"/>
+<!--                                                <img t-att-src="'om_hospital/static/description/icon.png' + str(o.id) + '/image_image'"-->
+<!--                                                     style="width:100px;height:100px;"/>-->
+<!--                                                <img t-if="o.image"-->
+<!--                                                     t-att-src="'data:image/png;base64,%s' % to_text(o.image)"-->
+<!--                                                     height="140" border="1" width="120"/>-->
+                                                <img t-if="o.image" t-att-src="image_data_uri(o.image)" height="140" border="1" width="120"/>
+                                            </p>
+                                        </td>
+                                        <td width="60%">
+                                            <table class="table table-condensed">
+                                                <tr>
+                                                    <td colspan="3" class="text-center">
+                                                        <span t-field="o.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <strong>Age</strong>
+                                                        </span>
+                                                    </td>
+<!--                                                    <td>-->
+<!--                                                        <span>:</span>-->
+<!--                                                    </td>-->
+                                                    <td>
+                                                        <span t-field="o.age"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <strong>Reference</strong>
+                                                        </span>
+                                                    </td>
+<!--                                                    <td>-->
+<!--                                                        <span>:</span>-->
+<!--                                                    </td>-->
+                                                    <td>
+                                                        <span t-field="o.ref"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <strong>Gender</strong>
+                                                        </span>
+                                                    </td>
+<!--                                                    <td>-->
+<!--                                                        <span>:</span>-->
+<!--                                                    </td>-->
+                                                    <td>
+                                                        <span t-field="o.gender"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+<!--                                            qr code -->
+                                            <div>
+                                                <img t-att-src="'/report/barcode/QR/'+o.gender"
+                                                     style="width:150px;height:75px" alt="Barcode"/>
+                                                <!--                                            barcode-->
+
+<!--                                                  <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:400px;height:75px" alt="Barcode"/>-->
+                                            </div>
+<!--                                            <div>-->
+<!--                                                 <span t-field="o.name" t-options="{'widget': 'barcode', 'width': 400,'height': 100, 'humanreadable': 0}" />-->
+<!--                                            </div>-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+<!--                        <br/>-->
+
+<!--                        <t t-if="o.appointment_ids">-->
+<!--                            <span>Appointment Details</span>-->
+<!--                            <table class="table table-sm o_main_table" name="appointment">-->
+<!--                                <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th name="th_reference" class="text-start">-->
+<!--                                            <span>Reference</span>-->
+<!--                                        </th>-->
+<!--                                        <th name="th_age" class="text-start">-->
+<!--                                            <span>Age</span>-->
+<!--                                        </th>-->
+<!--                                        <th name="th_doctor" class="text-start">-->
+<!--                                            <span>Doctor</span>-->
+<!--                                        </th>-->
+<!--                                    </tr>-->
+<!--                                </thead>-->
+<!--                                <t t-set="appointment_count" t-value="0"/>-->
+<!--                                <t t-foreach="o.appointment_ids" t-as="line">-->
+<!--                                    <t t-set="appointment_count" t-value="appointment_count + 1"/>-->
+<!--                                    <tr>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="line.name"/>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="line.age"/>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="line.doctor_id.doctor_name"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </t>-->
+
+<!--                                <tr>-->
+<!--                                    <td colspan="2">-->
+<!--                                        <strong>Total Appointments</strong>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <t t-esc="appointment_count"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </t>-->
+                        <br/>
+                        <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;'><u><span style="font-size:24px;line-height:107%;">Test test</span></u></p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;'><u><span style="font-size:24px;line-height:107%;"><span style="text-decoration: none;"></span></span></u></p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;'><u><span style="font-size:24px;line-height:107%;"><span style="text-decoration: none;"></span></span></u></p>
+<table style="border-collapse:collapse;border:none;" width="100%">
+    <tbody>
+        <tr>
+            <td style="width: 116.85pt;border: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">1</span></u></p>
+            </td>
+            <td style="width: 116.85pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">2</span></u></p>
+            </td>
+            <td style="width: 116.9pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">3</span></u></p>
+            </td>
+            <td style="width: 116.9pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">4</span></u></p>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 116.85pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">5</span></u></p>
+            </td>
+            <td style="width: 116.85pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">5</span></u></p>
+            </td>
+            <td style="width: 116.9pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">6</span></u></p>
+            </td>
+            <td style="width: 116.9pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
+                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;line-height:normal;'><u><span style="font-size:24px;">4</span></u></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;'><u><span style="font-size:24px;line-height:107%;"><span style="text-decoration: none;"></span></span></u></p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;'><u><span style="font-size:24px;line-height:107%;"><span style="text-decoration: none;"></span></span></u></p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;font-size:11.0pt;font-family:"Calibri",sans-serif;text-align:center;'><u><span style="font-size:24px;line-height:107%;">iniibyvutcrt</span></u></p>
+
+                    </div>
+                </t>
+            </t>
+
+    </template>
+
+</odoo>

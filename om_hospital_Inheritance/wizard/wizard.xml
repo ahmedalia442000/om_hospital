@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Define the view for SaleOrderLineRegistration wizard -->
+        <record id="view_sale_order_line_registration_form" model="ir.ui.view">
+            <field name="name">sale.order.line.registration.form</field>
+            <field name="model">sale.order.line.registration</field>
+            <field name="arch" type="xml">
+                <form string="Register Order Lines">
+                    <group>
+                        <field name="product_id"/>
+                        <field name="quantity"/>
+                    </group>
+                    <footer>
+                        <button name="save_order_line" string="Save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
